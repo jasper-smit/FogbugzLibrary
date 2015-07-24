@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>FogBugzLib documentation</title>
+</head>
+<body>
+<h1>FogBugzLib documentation</h1>
+
+<h2>Loggin in and out</h2>
+
+<code>FogBugz fogbugz = FogBugz.login(server, username, password);</code><br/>
+
+To logout: <br/>
+
+<code>fogbugz.logout();</code>
+
+<h2>Retrieving cases</h2>
+
+Retrieving a particular case: <br/>
+
+<code>Case cs = Case.get(fogbugz, 20000);</code><br/>
+
+Listing filters: <br/>
+
+<code>List&lt;Filter&gt; filters = Filter.listFilters(fogbugz);</code><br/>
+
+Executing a particular filter: <br/>
+
+<code>List&lt;Case&gt; cases = Filter.getByName(fogbugz, "s-Ocasys").execute();</code>
+
+<h2>Mailboxes, People, Statuses, Priorities, Projects, Areas and Categories</h2>
+
+Listing objects: <br/>
+<code>
+    List&lt;Mailbox&gt; mailboxes = Mailbox.listMailboxes(fogbugz); <br/>
+    List&lt;Person&gt; people = Person.listPeople(fogbugz); <br/>
+    List&lt;Status&gt; statuses = Status.listStatuses(fogbugz); <br/>
+    ... <br/>
+</code>
+<em>Note that these objects are cached! If an object is added, deleted or modified, the changes won't be visible
+    in the library until the cache is cleared:</em> <br/>
+
+<code>fogbugz.clearCache();</code> <br/>
+
+Getting a single object: <br/>
+<code>
+    Mailbox mailbox = Mailbox.get(fogbugz, ...); <br/>
+    Person person = Person.get(fogbugz, ...); <br/>
+    Status status = Status.get(fogbugz, ...); <br/>
+    ... <br/>
+</code><br/>
+
+Some objects have additional getters, like <code>getByName</code>, <code>getByEmail</code> etc. <br/>
+
+<h2>Changing cases</h2>
+
+Edit a case:<br/>
+<code>cs.edit("Edit message");</code><br/>
+When editting a case it is possible to change the category, project, area etc. To do so, first call
+<code>setCategory</code>, <code>setProject</code>, <code>setArea</code> before calling <code>edit()</code><br/>
+When changing the area, don't forget to also update the project <br/>
+<br/>
+Assigning a case:<br/>
+<code>
+    cs.setAssignedTo(Person.getByEmail(fogbugz, "user@domain.com")); <br/>
+    cs.assign("blablabla"); <br/>
+</code>
+
+
+
+</body>
+</html>

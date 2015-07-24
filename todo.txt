@@ -1,0 +1,2 @@
+- Wijzigen van area, zonder ook project aan te passen faalt
+- Checken waarom resolve goed gaat, terwijl je dan een ongeldige status meestuurt
